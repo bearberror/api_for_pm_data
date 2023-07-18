@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 ## Setup database + engine
-DATABASE_URL = "sqlite:///./pm_api/pm.db"
+DATABASE_URL = "sqlite:///./pm.db"
 
 engine = create_engine(DATABASE_URL, connect_args= {"check_same_thread": False})
 
