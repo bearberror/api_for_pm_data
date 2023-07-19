@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-import models, schemas
+import models
 
 ## setup CRUD function
 ## Get all pollutions data
