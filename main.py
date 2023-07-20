@@ -19,3 +19,7 @@ def get_db():
 def read_pm(skip= 0, limit= 100, db: Session = Depends(get_db)):
     pmdata = crud.get_pm(db, skip= skip, limit= limit)
     return pmdata
+
+@app.get("/pmdata/provinces/")
+def read_provinces(odpc:int, db: Session = Depends(get_db)):
+    return crud.get_provinces_list(odpc= odpc, db= db)
