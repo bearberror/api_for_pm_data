@@ -10,7 +10,38 @@ services:
       - ./:/app
     depends_on:
       - db
+    networks:
+      - app-network
   db:
     image: keinos/sqlite3:latest
     volumes:
       - ./data:/data
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    cap_add:
+      - SYS_NICE
+    tty: true
+    environment:
+      MYSQL_ROOT_PASSWORD: "Rootp@ssw0rd"
+      MYSQL_USER: "dev"
+      MYSQL_PASSWORD: "default"
+      MYSQL_DATABASE: pm25
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql-files:/var/lib/mysql-files
+    networks:
+      - app-network
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
